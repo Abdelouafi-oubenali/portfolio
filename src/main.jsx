@@ -1,11 +1,18 @@
-import { StrictMode } from 'react'
 import React from 'react';
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import HomeSection from './sections/HomeSection';
+import AboutSection from './sections/AboutSection';
+import ProjectsSection from './sections/ProjectsSection';
+import SkillsSection from './sections/SkillsSection';
+import ContactSection from './sections/ContactSection';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+export default function Main({ setActiveSection }) {
+  return (
+    <main className="relative z-10">
+      <HomeSection />
+      <AboutSection />
+      <ProjectsSection />
+      <SkillsSection />
+      <ContactSection />
+    </main>
+  );
+}
