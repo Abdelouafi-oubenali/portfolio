@@ -5,8 +5,9 @@ import ProjectsSection from './sections/ProjectsSection';
 import SkillsSection from './sections/SkillsSection';
 import ContactSection from './sections/ContactSection';
 
-export default function Main({ setActiveSection }) {
+export default function Main() {
   return (
+    
     <main className="relative z-10">
       <HomeSection />
       <AboutSection />
@@ -16,3 +17,4 @@ export default function Main({ setActiveSection }) {
     </main>
   );
 }
+

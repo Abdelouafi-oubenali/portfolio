@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Main from './Main';
 import NavLink from './components/NavLink';
@@ -19,14 +19,30 @@ export default function GreenThemedPortfolio() {
     setIsMenuOpen(false);
   };
 
+  const handleClickOutside = (event) => {
+    if (!event.target.closest('nav')) {
+      setIsMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.addEventListener('click', handleClickOutside);
+    } else {
+      document.removeEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   return (
     <div className="min-h-screen overflow-x-hidden font-sans bg-green-50">
-      {/* Arrière-plan avec dégradé vert */}
       <div className="fixed inset-0 bg-gradient-to-br from-green-800 via-green-900 to-emerald-900 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(220,252,231,0.1)_0,transparent_70%)]"></div>
       </div>
-      
-      {/* Header avec navigation */}
+
       <header className="fixed top-0 left-0 right-0 bg-green-900 bg-opacity-90 backdrop-blur-sm shadow-lg z-50">
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center h-20">
           <div className="flex items-center">
@@ -34,8 +50,7 @@ export default function GreenThemedPortfolio() {
               <span className="text-xl font-bold text-white">TD<span className="text-green-300">.</span></span>
             </div>
           </div>
-          
-          {/* Navigation desktop */}
+
           <nav className="hidden md:flex space-x-8">
             <NavLink 
               active={activeSection === 'home'} 
@@ -68,17 +83,16 @@ export default function GreenThemedPortfolio() {
               Contact
             </NavLink>
           </nav>
-          
-          {/* Bouton menu mobile */}
+
           <button 
             className="md:hidden text-white hover:text-green-300 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle navigation menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-        
-        {/* Menu mobile */}
+
         {isMenuOpen && (
           <div className="md:hidden bg-green-900 bg-opacity-95 backdrop-blur-md shadow-lg">
             <div className="container mx-auto px-4 py-2 flex flex-col">
@@ -120,3 +134,4 @@ export default function GreenThemedPortfolio() {
       <Main setActiveSection={setActiveSection} />
     </div>
   );
+}
