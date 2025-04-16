@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import Main from './Main';
+import Main from './test';
 import NavLink from './components/NavLink';
 import MobileNavLink from './components/MobileNavLink';
 
