@@ -1,6 +1,6 @@
 import React from 'react';
 import { Mail, Github, Linkedin } from 'lucide-react';
-import SocialButton from '../components/SocialButton';
+import SocialButton from '../ui/SocialButton';
 
 export default function ContactSection() {
   return (

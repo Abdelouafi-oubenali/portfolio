@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 
-export default function HomeSection() {
+export default function HomeSection({ scrollToSection }) {
   const [displayedLetters, setDisplayedLetters] = useState([]);
   const [showImage, setShowImage] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
   
-  const name = "Thomas Dupont";
+  const name = "Abdelouafi  Oubenali";
   
   useEffect(() => {
+    // Animation du nom lettre par lettre
     const letters = name.split('');
     let currentIndex = 0;
     
@@ -27,22 +28,15 @@ export default function HomeSection() {
       }
     }, 100);
     
-    return () => clearInterval(intervalId);
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [name]);
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   return (
     <section id="home" className="flex flex-col items-center justify-center min-h-screen px-4 py-20 pt-32">
       <div className="max-w-4xl mx-auto text-center">
+        {/* Animation du nom lettre par lettre */}
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-white to-green-200">
           <div className="inline-flex flex-wrap justify-center">
             {displayedLetters.map((letter, index) => (
@@ -59,16 +53,18 @@ export default function HomeSection() {
           </div>
         </h1>
         
+        {/* Image qui apparaît une fois le nom affiché */}
         <div className={`mb-8 transition-all duration-500 ${showImage ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-8'}`}>
           <div className="w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden border-4 border-green-300 border-opacity-60 shadow-2xl">
             <img 
-              src="/api/placeholder/400/400" 
+              src="https://intranet.youcode.ma/storage/users/profile/thumbnail/1139-1727859974.JPG" 
               alt="Portrait" 
               className="w-full h-full object-cover"
             />
           </div>
         </div>
         
+        {/* Texte et boutons qui apparaissent après */}
         <p className={`text-lg md:text-xl text-green-100 mb-8 transition-opacity duration-1000 ${animationComplete ? 'opacity-100' : 'opacity-0'}`}>
           Développeur Web & Designer d'Expériences Numériques
         </p>
